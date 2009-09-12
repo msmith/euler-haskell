@@ -14,6 +14,7 @@ import P19
 import P22
 import P28
 import P30
+import P52
 
 euler1 = sum [x | x <- [0..999], x `mod` 3 == 0 || x `mod` 5 == 0]
 
@@ -92,6 +93,7 @@ solutions = [ (1, return euler1, 233168),
               (30, return euler30, 443839),
               (35, return euler35, 55),
               (48, return euler48, 9110846700),
+              (52, return euler52, 142857),
               (67, return euler67, 7273)
             ]
 
