@@ -1,3 +1,5 @@
+module P15 where
+
 import Util
 
 -- For an NxN grid, it takes 2n steps to get from top-left to bottom-right.

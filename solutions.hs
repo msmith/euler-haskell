@@ -7,6 +7,7 @@ import Data.Maybe
 import P8
 import P9
 import P13
+import P15
 import P17
 import P18
 import P19
@@ -53,7 +54,9 @@ euler20 = sum $ digits $ fact 100
 euler25 = fromIntegral . length . fst $ break p fibs
     where
         p x = (length $ digits x) == 1000
-        
+
+euler35 = fromIntegral $ length $ filter isCircularPrime $ takeWhile (<1000000) primes
+
 euler48 = (lastDigits 10) . sum $ map pow [1..1000]
     where
         pow x = x^x
@@ -75,6 +78,7 @@ solutions = [ (1, return euler1, 233168),
               (12, return euler12, 76576500),
               (13, return euler13, 5537376230),
               (14, return euler14, 837799),
+              (15, return euler15, 137846528820),
               (16, return euler16, 1366),
               (17, return euler17, 21124),
               (18, return euler18, 1074),
@@ -82,11 +86,13 @@ solutions = [ (1, return euler1, 233168),
               (20, return euler20, 648),
               (22, euler22, 871198282),
               (25, return euler25, 4782),
+              (35, return euler35, 55),
               (48, return euler48, 9110846700),
               (67, return euler67, 7273)
             ]
 
 main = do
+    putStrLn $ show (length solutions) ++ " solutions..."
     mapM_ (\x -> format x >>= putStrLn) solutions
         where
             format (n, a, e) = do

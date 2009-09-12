@@ -54,8 +54,16 @@ lcm = merge . highestOfEachPrime
 lcmCheat :: [Integer] -> Integer
 lcmCheat = foldl Prelude.lcm 1
 
-digits :: (Num b, Show a) => a -> [b]
-digits n = map (fromIntegral . digitToInt) $ show n
+digits :: (Integral t) => t -> [t]
+digits n = f n []
+    where
+        f 0 xs = xs
+        f y xs = f d (m:xs)
+            where
+                (d, m) = y `divMod` 10
+
+undigits :: [Integer] -> Integer
+undigits = foldl (\x y -> x * 10 + y) 0
 
 triangleNumbers :: [Integer]
 triangleNumbers = tn 1 2
@@ -96,3 +104,13 @@ pascalsTriangle = p' [1]
             where
                 next = zipWith (+) padded $ tail padded
                 padded = [0] ++ xs ++ [0]
+
+isCircularPrime :: Integer -> Bool         
+isCircularPrime x = all prime $ map undigits $ rotations $ digits x
+
+rotations :: [a] -> [[a]]
+rotations xs = map (rotateAt xs) $ [1..length xs]
+    where
+        rotateAt xs i = flipIt $ splitAt i xs
+        flipIt (a, b) = b ++ a
+
