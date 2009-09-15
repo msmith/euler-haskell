@@ -14,6 +14,7 @@ import P19
 import P22
 import P28
 import P30
+import P24
 import P52
 
 euler1 = sum [x | x <- [0..999], x `mod` 3 == 0 || x `mod` 5 == 0]
@@ -54,6 +55,8 @@ euler17 = fromIntegral . length . filter isAlpha . concat $ map speak [1..1000]
 
 euler20 = sum $ digits $ fact 100
 
+euler24 = undigits $ map fromIntegral $ lexPermutation [0..9] (1000000-1)
+
 euler25 = fromIntegral . length . fst $ break p fibs
     where
         p x = (length $ digits x) == 1000
@@ -88,6 +91,7 @@ solutions = [ (1, return euler1, 233168),
               (19, return euler19, 171),
               (20, return euler20, 648),
               (22, euler22, 871198282),
+              (24, return euler24, 2783915460),
               (25, return euler25, 4782),
               (28, return euler28, 669171001),
               (30, return euler30, 443839),
