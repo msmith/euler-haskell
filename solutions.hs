@@ -19,11 +19,13 @@ import P52
 
 euler1 = sum [x | x <- [0..999], x `mod` 3 == 0 || x `mod` 5 == 0]
 
-euler2 = sum $ filter even $ takeWhile ((>) 4000000) fibs
+euler2 = sum $ filter even $ takeWhile (< 4000000) fibs
 
 euler3 = maximum $ primeFactors 600851475143
 
-euler4 = maximum $ map undigits $ filter palindrome [digits (x * y) | x <- [1..999], y <- [1..999]]
+euler4 = maximum $ map undigits $ filter palindrome [digits (x * y) | x <- ns, y <- ns]
+    where
+        ns = [100..999]
 
 euler5 = Util.lcm [2..20]
 
@@ -57,9 +59,9 @@ euler20 = sum $ digits $ fact 100
 
 euler24 = undigits $ map fromIntegral $ lexPermutation [0..9] (1000000-1)
 
-euler25 = fromIntegral . length . fst $ break p fibs
+euler25 = fromIntegral . (1+) . length $ takeWhile p fibs
     where
-        p x = (length $ digits x) == 1000
+        p x = (length $ digits x) < 1000
 
 euler35 = fromIntegral $ length $ filter isCircularPrime $ takeWhile (<1000000) primes
 

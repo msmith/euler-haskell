@@ -17,7 +17,7 @@ maxPathSlow tri (depth,x) | depth == maxDepth = 0
 
 -- improved algorithm based on post from euler forums
 maxPath [xs] = xs
-maxPath (xs:xss) = zipWith (+) xs $ zipWith max cs $ tail cs
+maxPath (xs:xss) = zipWith (+) xs $ zipWith max cs (tail cs)
     where
         cs = maxPath xss
 

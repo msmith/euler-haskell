@@ -3,8 +3,8 @@ module Util where
 import Data.List
 import Data.Char
 
-fibs :: [Integer]
-fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
+fibs :: (Num a) => [a]
+fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 
 factors :: (Integral a) => a -> [a]
 factors n = nub $ concat $ [[x, (n `div` x)] | x <- [1..end], n `mod` x == 0]
@@ -53,7 +53,7 @@ lcm = merge . highestOfEachPrime
                         n = length same
 
 lcmCheat :: [Integer] -> Integer
-lcmCheat = foldl Prelude.lcm 1
+lcmCheat = foldl1 Prelude.lcm
 
 digits :: (Integral t) => t -> [t]
 digits n = f n []
