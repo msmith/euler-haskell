@@ -63,7 +63,7 @@ digits n = f n []
                 (d, m) = y `divMod` 10
 
 undigits :: [Integer] -> Integer
-undigits = foldl (\x y -> x * 10 + y) 0
+undigits = foldl (\x y -> x*10 + y) 0
 
 triangleNumbers :: [Integer]
 triangleNumbers = tn 1 2
@@ -72,7 +72,7 @@ triangleNumbers = tn 1 2
         
 collatz :: (Integral t) => t -> [t]
 collatz 1 = [1]
-collatz n = n:(collatz next)
+collatz n = n : collatz next
     where
         next | even n    = n `div` 2
              | otherwise = 3*n + 1
@@ -87,7 +87,7 @@ uniq (x:xs) | x == head xs = x:(uniq $ tail xs)
             | otherwise = x:(uniq xs)
 	
 split :: (Eq a) => a -> [a] -> [[a]]
-split x = splitWith ((==) x)
+split x = splitWith (== x)
 
 splitWith :: (a -> Bool) -> [a] -> [[a]]
 splitWith predicate xs =

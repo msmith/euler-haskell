@@ -63,6 +63,10 @@ euler25 = fromIntegral . length . fst $ break p fibs
 
 euler35 = fromIntegral $ length $ filter isCircularPrime $ takeWhile (<1000000) primes
 
+euler40 = product $ map (\x -> d!!(x-1)) [1,10,100,1000,10000,100000,1000000]
+    where
+        d = concat $ map digits [1..1000000]
+
 euler48 = (lastDigits 10) . sum $ map pow [1..1000]
     where
         pow x = x^x
@@ -96,6 +100,7 @@ solutions = [ (1, return euler1, 233168),
               (28, return euler28, 669171001),
               (30, return euler30, 443839),
               (35, return euler35, 55),
+              (40, return euler40, 210),
               (48, return euler48, 9110846700),
               (52, return euler52, 142857),
               (67, return euler67, 7273)
