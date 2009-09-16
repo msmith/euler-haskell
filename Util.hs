@@ -6,25 +6,26 @@ import Data.Char
 fibs :: [Integer]
 fibs = 0 : 1 : zipWith (+) fibs (tail fibs)
 
-factors :: Integral a => a -> [a]
+factors :: (Integral a) => a -> [a]
 factors n = nub $ concat $ [[x, (n `div` x)] | x <- [1..end], n `mod` x == 0]
     where
         end = floor . sqrt $ fromIntegral n
 
-prime :: Integral a => a -> Bool
-prime x = notElem 0 $ map (x `mod`) [2..m]
+prime :: (Integral a) => a -> Bool
+prime n = all notDivisible [2..m]
     where
-        m = floor $ sqrt $ fromIntegral x
+        notDivisible x = n `mod` x /= 0
+        m = floor $ sqrt $ fromIntegral n
 
-primes :: Integral a => [a]
-primes = filter prime [2..]
+primes :: (Integral a) => [a]
+primes = 2 : filter prime [3,5..]
 
-lowestPrimeFactor :: Integral a => a -> a
+lowestPrimeFactor :: (Integral a) => a -> a
 lowestPrimeFactor = head . filter prime . factors
     where
         prime n = (factors n) == [1, n]
 
-primeFactors :: Integral a => a -> [a]
+primeFactors :: (Integral a) => a -> [a]
 primeFactors n = primeFactors' [] n
     where
         primeFactors' ps n | prime n = n:ps
@@ -33,7 +34,7 @@ primeFactors n = primeFactors' [] n
                 lpf = lowestPrimeFactor n
 
 palindrome :: Eq a => [a] -> Bool
-palindrome xs = xs == (reverse xs)
+palindrome xs = xs == reverse xs
 
 lcm :: [Integer] -> Integer
 lcm = merge . highestOfEachPrime
@@ -66,9 +67,7 @@ undigits :: [Integer] -> Integer
 undigits = foldl (\x y -> x*10 + y) 0
 
 triangleNumbers :: [Integer]
-triangleNumbers = tn 1 2
-    where
-        tn x y = x:(tn (x+y) (y+1))
+triangleNumbers = scanl1 (+) [1..]
         
 collatz :: (Integral t) => t -> [t]
 collatz 1 = [1]
@@ -79,12 +78,6 @@ collatz n = n : collatz next
 
 fact :: (Num t, Enum t) => t -> t
 fact n = product [1..n]
-
-uniq :: Eq a => [a] -> [a]
-uniq []     = []
-uniq [x]    = [x]
-uniq (x:xs) | x == head xs = x:(uniq $ tail xs)
-            | otherwise = x:(uniq xs)
 	
 split :: (Eq a) => a -> [a] -> [[a]]
 split x = splitWith (== x)

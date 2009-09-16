@@ -23,7 +23,7 @@ euler2 = sum $ filter even $ takeWhile ((>) 4000000) fibs
 
 euler3 = maximum $ primeFactors 600851475143
 
-euler4 = maximum $ map read $ filter palindrome [show (x * y) | x <- [1..999], y <- [1..999]]
+euler4 = maximum $ map undigits $ filter palindrome [digits (x * y) | x <- [1..999], y <- [1..999]]
 
 euler5 = Util.lcm [2..20]
 
@@ -44,7 +44,7 @@ euler10 = sum $ takeWhile (< 2000000) primes
 
 euler12 = head $ dropWhile (\x -> (length $ factors x) <= 500) triangleNumbers
 
-euler13 = read $ concat $ map show $ take 10 $ digits $ sum p13
+euler13 = undigits $ take 10 $ digits $ sum p13
 
 -- use strict foldl otherwise we get a stack overflow
 euler14 = snd $ foldl1' max $ map (\n -> ((length $ collatz n), n)) [1..999999]
@@ -70,8 +70,7 @@ euler40 = product $ map (\x -> d!!(x-1)) [1,10,100,1000,10000,100000,1000000]
 euler48 = (lastDigits 10) . sum $ map pow [1..1000]
     where
         pow x = x^x
-        lastDigits n = digitsToInt . (takeLast n) . digits
-        digitsToInt = read . concat . (map show)
+        lastDigits n = undigits . (takeLast n) . digits
         takeLast n = reverse . (take n) . reverse
 
 
