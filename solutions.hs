@@ -44,7 +44,7 @@ euler9 = a * b * c
 
 euler10 = sum $ takeWhile (< 2000000) primes
 
-euler12 = head $ dropWhile (\x -> (length $ factors x) <= 500) triangleNumbers
+euler12 = head $ dropWhile ((<= 500) . length . factors) triangleNumbers
 
 euler13 = undigits $ take 10 $ digits $ sum p13
 

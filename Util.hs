@@ -43,14 +43,9 @@ lcm = merge . highestOfEachPrime
         mult (x,e) = x^e
         highestOfEachPrime = map (head . reverse) . groupBy fstEq . sort . concat . atoms
         fstEq x y = (fst x) == (fst y)
-        atoms = map freqs . map (sort . primeFactors)
+        atoms = map ((map freqs) . group . sort . primeFactors)
             where
-                freqs [] = []
-                freqs xs = (x,n) : freqs rest
-                    where
-                        (same, rest) = break (/= x) xs
-                        x = head xs
-                        n = length same
+                freqs fs = (head fs, length fs)
 
 lcmCheat :: [Integer] -> Integer
 lcmCheat = foldl1 Prelude.lcm

@@ -2,11 +2,11 @@ module P28 (euler28) where
     
 euler28 = solve 1001
 
-solve n = sum $ takeWhile (<=(n^2)) series
+solve n = sum $ takeWhile (<= n^2) series
 
 series = 1:(f 1 skips)
     where
-        skips = concat $ map (take 4 . repeat) $ iterate (+2) 2
+        skips = concat $ map (replicate 4) $ iterate (+2) 2
         f x ss = n:(f n ns)
             where
                 (s:ns) = ss
