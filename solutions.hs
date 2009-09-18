@@ -12,9 +12,10 @@ import P17
 import P18
 import P19
 import P22
+import P24
 import P28
 import P30
-import P24
+import P31
 import P52
 
 euler1 = sum [x | x <- [0..999], x `mod` 3 == 0 || x `mod` 5 == 0]
@@ -100,6 +101,7 @@ solutions = [ (1, return euler1, 233168),
               (25, return euler25, 4782),
               (28, return euler28, 669171001),
               (30, return euler30, 443839),
+              (31, return euler31, 73682),
               (35, return euler35, 55),
               (40, return euler40, 210),
               (48, return euler48, 9110846700),
