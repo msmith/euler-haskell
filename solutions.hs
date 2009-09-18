@@ -1,3 +1,5 @@
+module Solutions where
+    
 import Util
 
 import Data.Char
@@ -77,46 +79,40 @@ euler48 = (lastDigits 10) . sum $ map pow [1..1000]
         takeLast n = reverse . (take n) . reverse
 
 
-solutions = [ (1, return euler1, 233168),
-              (2, return euler2, 4613732),
-              (3, return euler3, 6857),
-              (4, return euler4, 906609),
-              (5, return euler5, 232792560),
-              (6, return euler6, 25164150),
-              (7, return euler7, 104743),
-              (8, return euler8, 40824),
-              (9, return euler9, 31875000),
-              (10, return euler10, 142913828922),
-              (12, return euler12, 76576500),
-              (13, return euler13, 5537376230),
-              (14, return euler14, 837799),
-              (15, return euler15, 137846528820),
-              (16, return euler16, 1366),
-              (17, return euler17, 21124),
-              (18, return euler18, 1074),
-              (19, return euler19, 171),
-              (20, return euler20, 648),
-              (22, euler22, 871198282),
-              (24, return euler24, 2783915460),
-              (25, return euler25, 4782),
-              (28, return euler28, 669171001),
-              (30, return euler30, 443839),
-              (31, return euler31, 73682),
-              (35, return euler35, 55),
-              (40, return euler40, 210),
-              (48, return euler48, 9110846700),
-              (52, return euler52, 142857),
-              (67, return euler67, 7273)
+solutions = [ Solution 1 (return euler1) 233168,
+              Solution 2 (return euler2) 4613732,
+              Solution 3 (return euler3) 6857,
+              Solution 4 (return euler4) 906609,
+              Solution 5 (return euler5) 232792560,
+              Solution 6 (return euler6) 25164150,
+              Solution 7 (return euler7) 104743,
+              Solution 8 (return euler8) 40824,
+              Solution 9 (return euler9) 31875000,
+              Solution 10 (return euler10) 142913828922,
+              Solution 12 (return euler12) 76576500,
+              Solution 13 (return euler13) 5537376230,
+              Solution 14 (return euler14) 837799,
+              Solution 15 (return euler15) 137846528820,
+              Solution 16 (return euler16) 1366,
+              Solution 17 (return euler17) 21124,
+              Solution 18 (return euler18) 1074,
+              Solution 19 (return euler19) 171,
+              Solution 20 (return euler20) 648,
+              Solution 22 euler22 871198282,
+              Solution 24 (return euler24) 2783915460,
+              Solution 25 (return euler25) 4782,
+              Solution 28 (return euler28) 669171001,
+              Solution 30 (return euler30) 443839,
+              Solution 31 (return euler31) 73682,
+              Solution 35 (return euler35) 55,
+              Solution 40 (return euler40) 210,
+              Solution 48 (return euler48) 9110846700,
+              Solution 52 (return euler52) 142857,
+              Solution 67 (return euler67) 7273
             ]
 
-main = do
-    putStrLn $ show (length solutions) ++ " solutions..."
-    mapM_ (\x -> format x >>= putStrLn) solutions
-        where
-            format (n, a, e) = do
-                ar <- a
-                return $ num ++ (show ar) ++ (check (ar == e))
-                where
-                    num = (show n) ++ ": "
-                    check True = ""
-                    check False = "  BZZT!"
+data Solution = Solution
+    { num      :: Integer
+    , solution :: IO Integer
+    , expected :: Integer
+    }
