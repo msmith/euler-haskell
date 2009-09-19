@@ -68,6 +68,8 @@ euler25 = fromIntegral . (1+) . length $ takeWhile p fibs
 
 euler35 = fromIntegral $ length $ filter isCircularPrime $ takeWhile (<1000000) primes
 
+euler36 = sum $ [x | x <- [0..999999], palindrome (digits x) && palindrome (digitsBase 2 x)]
+
 euler40 = product $ map (\x -> d!!(x-1)) [1,10,100,1000,10000,100000,1000000]
     where
         d = concat $ map digits [1..1000000]
@@ -105,6 +107,7 @@ solutions = [ Solution 1 (return euler1) 233168,
               Solution 30 (return euler30) 443839,
               Solution 31 (return euler31) 73682,
               Solution 35 (return euler35) 55,
+              Solution 36 (return euler36) 872187,
               Solution 40 (return euler40) 210,
               Solution 48 (return euler48) 9110846700,
               Solution 52 (return euler52) 142857,

@@ -50,16 +50,22 @@ lcm = merge . highestOfEachPrime
 lcmCheat :: [Integer] -> Integer
 lcmCheat = foldl1 Prelude.lcm
 
-digits :: (Integral t) => t -> [t]
-digits n = f n []
+digitsBase :: (Integral t) => t -> t -> [t]
+digitsBase b n = f n []
     where
         f 0 xs = xs
         f y xs = f d (m:xs)
             where
-                (d, m) = y `divMod` 10
+                (d, m) = y `divMod` b
+
+digits :: (Integral t) => t -> [t]
+digits = digitsBase 10
+
+undigitsBase :: Integer -> [Integer] -> Integer
+undigitsBase b = foldl (\x y -> x*b + y) 0
 
 undigits :: [Integer] -> Integer
-undigits = foldl (\x y -> x*10 + y) 0
+undigits = undigitsBase 10
 
 triangleNumbers :: [Integer]
 triangleNumbers = scanl1 (+) [1..]
