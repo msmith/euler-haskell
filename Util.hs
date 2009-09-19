@@ -7,7 +7,7 @@ fibs :: (Num a) => [a]
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
 
 factors :: (Integral a) => a -> [a]
-factors n = nub $ concat $ [[x, (n `div` x)] | x <- [1..end], n `mod` x == 0]
+factors n = nub $ concat [[x, (n `div` x)] | x <- [1..end], n `mod` x == 0]
     where
         end = floor . sqrt $ fromIntegral n
 
@@ -47,9 +47,6 @@ lcm = merge . highestOfEachPrime
             where
                 freqs fs = (head fs, length fs)
 
-lcmCheat :: [Integer] -> Integer
-lcmCheat = foldl1 Prelude.lcm
-
 digitsBase :: (Integral t) => t -> t -> [t]
 digitsBase b n = f n []
     where
@@ -61,7 +58,7 @@ digitsBase b n = f n []
 digits :: (Integral t) => t -> [t]
 digits = digitsBase 10
 
-undigitsBase :: Integer -> [Integer] -> Integer
+undigitsBase :: (Num a) => a -> [a] -> a
 undigitsBase b = foldl (\x y -> x*b + y) 0
 
 undigits :: [Integer] -> Integer
@@ -108,3 +105,10 @@ rotations xs = map (rotateAt xs) $ [1..length xs]
         rotateAt xs i = flipIt $ splitAt i xs
         flipIt (a, b) = b ++ a
 
+-- Read comma-separated, quoted strings from a file
+readWordList :: FilePath -> IO [String]
+readWordList file = do
+    s <- readFile file
+    return $ map strip $ split ',' s
+        where
+            strip = init . tail
