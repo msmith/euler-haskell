@@ -18,12 +18,13 @@ parseArg = do
 
 printIt :: [Solution] -> IO ()
 printIt ss = do
-    mapM_ (\x -> format x >>= putStrLn) $ ss
+    mapM_ (\x -> format x >>= putStrLn) ss
         where
-            format sol = do
-                ar <- solution sol
-                return $ n ++ (show ar) ++ (check (ar == (expected sol)))
+            format s = do
+                let n = num s
+                let e = expected s
+                sol <- solution s
+                return $ show n ++ ": " ++ show sol ++ check (sol == e)
                     where
-                        n = (show $ num sol) ++ ": "
                         check True = ""
                         check False = "  BZZT!"
