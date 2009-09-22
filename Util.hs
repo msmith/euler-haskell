@@ -2,6 +2,7 @@ module Util where
 
 import Data.List
 import Data.Char
+import Data.Ord (comparing)
 
 fibs :: (Num a) => [a]
 fibs = 1 : 1 : zipWith (+) fibs (tail fibs)
@@ -27,6 +28,7 @@ lowestPrimeFactor = head . filter prime . factors
         prime n = (factors n) == [1, n]
 
 primeFactors :: (Integral a) => a -> [a]
+primeFactors 1 = error "1 doesn't have primeFactors"
 primeFactors n = primeFactors' [] n
     where
         primeFactors' ps n | prime n = n:ps
@@ -38,12 +40,13 @@ palindrome :: Eq a => [a] -> Bool
 palindrome xs = xs == reverse xs
 
 lcm :: [Integer] -> Integer
-lcm = merge . highestOfEachPrime
+lcm = merge . highestOfEachPrime . filter (>1)
     where
         merge = product . map mult
         mult (x,e) = x^e
-        highestOfEachPrime = map (head . reverse) . groupBy fstEq . sort . concat . atoms
-        fstEq x y = (fst x) == (fst y)
+        highestOfEachPrime = map maxExponent . groupBy primeEq . sort . concat . atoms
+        maxExponent = maximumBy (comparing snd)
+        primeEq = equating fst
         atoms = map ((map freqs) . group . sort . primeFactors)
             where
                 freqs fs = (head fs, length fs)
@@ -113,3 +116,6 @@ readWordList file = do
     return $ map strip $ split ',' s
         where
             strip = init . tail
+
+equating :: (Eq a) => (t -> a) -> t -> t -> Bool
+equating p x y = (p x) == (p y)
