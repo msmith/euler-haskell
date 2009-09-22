@@ -18,6 +18,7 @@ import P24
 import P28
 import P30
 import P31
+import P37
 import P42
 import P45
 import P52
@@ -109,6 +110,7 @@ solutions = [ Solution 1 (return euler1) 233168,
               Solution 30 (return euler30) 443839,
               Solution 31 (return euler31) 73682,
               Solution 35 (return euler35) 55,
+              Solution 37 (return euler37) 748317,
               Solution 36 (return euler36) 872187,
               Solution 40 (return euler40) 210,
               Solution 42 euler42 162,

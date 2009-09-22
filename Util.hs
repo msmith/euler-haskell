@@ -12,6 +12,7 @@ factors n = nub $ concat [[x, (n `div` x)] | x <- [1..end], n `mod` x == 0]
         end = floor . sqrt $ fromIntegral n
 
 prime :: (Integral a) => a -> Bool
+prime 1 = False
 prime n = all notDivisible [2..m]
     where
         notDivisible x = n `mod` x /= 0
