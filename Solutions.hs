@@ -19,6 +19,7 @@ import P28
 import P30
 import P31
 import P37
+import P39
 import P42
 import P45
 import P52
@@ -84,6 +85,10 @@ euler48 = (lastDigits 10) . sum $ map pow [1..1000]
         takeLast n = reverse . (take n) . reverse
 
 
+euler53 = fromIntegral $ length $ filter (>1000000) xs
+    where
+        xs = [binomialCoefficient n r | n <- [1..100], r <- [1..n]]
+
 solutions = [ Solution 1 (return euler1) 233168,
               Solution 2 (return euler2) 4613732,
               Solution 3 (return euler3) 6857,
@@ -112,11 +117,13 @@ solutions = [ Solution 1 (return euler1) 233168,
               Solution 35 (return euler35) 55,
               Solution 37 (return euler37) 748317,
               Solution 36 (return euler36) 872187,
+              Solution 39 (return euler39) 840,
               Solution 40 (return euler40) 210,
               Solution 42 euler42 162,
               Solution 45 (return euler45) 1533776805,
               Solution 48 (return euler48) 9110846700,
               Solution 52 (return euler52) 142857,
+              Solution 53 (return euler53) 4075,
               Solution 67 (return euler67) 7273
             ]
 

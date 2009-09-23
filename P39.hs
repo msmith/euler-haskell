@@ -1,3 +1,5 @@
+module P39 (euler39) where
+    
 import Data.List (nub, maximumBy)
 import Data.Ord (comparing)
 
@@ -14,5 +16,3 @@ rightTriangle (a,b,c) = a*a + b*b == c*c
 solve p = maximumBy (comparing snd) $ map (\p -> (p, length $ combinations p)) [1..p]
 
 euler39 = fst $ solve 1000
-
-main = do print euler39
