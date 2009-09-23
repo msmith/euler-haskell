@@ -88,6 +88,10 @@ euler48 = (lastDigits 10) . sum $ map pow [1..1000]
 euler53 = fromIntegral $ length $ filter (>1000000) xs
     where
         xs = [binomialCoefficient n r | n <- [1..100], r <- [1..n]]
+        
+euler56 = maximum $ map (sum . digits) [a^b | a <- ns, b <- ns]
+    where
+        ns = [1..100]
 
 solutions = [ Solution 1 (return euler1) 233168,
               Solution 2 (return euler2) 4613732,
@@ -123,6 +127,7 @@ solutions = [ Solution 1 (return euler1) 233168,
               Solution 45 (return euler45) 1533776805,
               Solution 48 (return euler48) 9110846700,
               Solution 52 (return euler52) 142857,
+              Solution 56 (return euler56) 972,
               Solution 53 (return euler53) 4075,
               Solution 67 (return euler67) 7273
             ]
