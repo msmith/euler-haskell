@@ -1,12 +1,11 @@
 module P17 (speak) where
 
-main = do
-    mapM_ (putStrLn . speak) [1..1000]
+main = mapM_ (putStrLn . speak) [1..1000]
 
 speak 1000 = "one thousand"
 speak x | x `mod` 100 == 0 = word x
 speak x | x < 100  = word x
-        | x < 1000 = word a ++ " and " ++ (word b)
+        | x < 1000 = word a ++ " and " ++ word b
             where
                 a = x - b
                 b = x `mod` 100

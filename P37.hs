@@ -3,7 +3,7 @@ module P37 (euler37) where
 import Util
 import Data.List
 
-truncatablePrime x = all prime $ truncations x
+truncatablePrime = all prime . truncations
 
 truncations x = map undigits $ nub $ filter (not . null) $ inits d ++ tails d
     where

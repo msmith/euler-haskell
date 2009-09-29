@@ -47,7 +47,7 @@ lcm = merge . highestOfEachPrime . filter (>1)
         highestOfEachPrime = map maxExponent . groupBy primeEq . sort . concat . atoms
         maxExponent = maximumBy (comparing snd)
         primeEq = equating fst
-        atoms = map ((map freqs) . group . sort . primeFactors)
+        atoms = map (map freqs . group . sort . primeFactors)
             where
                 freqs fs = (head fs, length fs)
 
@@ -95,16 +95,16 @@ splitWith predicate xs =
 pascalsTriangle :: [[Integer]]
 pascalsTriangle = p' [1]
     where
-        p' xs = xs : (p' next)
+        p' xs = xs : p' next
             where
                 next = zipWith (+) padded $ tail padded
                 padded = [0] ++ xs ++ [0]
 
 isCircularPrime :: Integer -> Bool         
-isCircularPrime x = all prime $ map undigits $ rotations $ digits x
+isCircularPrime = all prime . map undigits . rotations . digits
 
 rotations :: [a] -> [[a]]
-rotations xs = map (rotateAt xs) $ [1..length xs]
+rotations xs = map (rotateAt xs) [1..length xs]
     where
         rotateAt xs i = flipIt $ splitAt i xs
         flipIt (a, b) = b ++ a

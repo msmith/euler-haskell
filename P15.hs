@@ -7,7 +7,7 @@ import Util
 -- Therefore, the number of paths = C(2n,n)
 
 binomialCoefficient n k | k < 0 || k > n = 0
-                        | otherwise      = ( fact n ) `div` ( (fact k) * (fact (n-k)) )
+                        | otherwise      = fact n `div` (fact k * fact (n-k))
 
 euler15 = numPaths 20
     where

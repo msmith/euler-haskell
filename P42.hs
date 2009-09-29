@@ -9,7 +9,7 @@ scoreWords = do
     return $ map score ws
         where
             strip = init . tail
-            score cs = fromIntegral $ sum $ map cScore cs
+            score = fromIntegral . sum . map cScore
             cScore c = (ord c) - (ord 'A') + 1
 
 euler42 = do

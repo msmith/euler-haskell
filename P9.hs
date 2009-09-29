@@ -10,4 +10,4 @@ pythagoreanTriplet (a,b,c) = (a < b) && (b < c) && (a^2 + b^2 == c^2)
 -- Umm..
 tripletsWithSum n = [(a,b,c) | a <- [1..(n-2)], b <- [(a+1)..(n-a-1)], c <- [(b+1)..(n-b-a)], a + b + c == n]
 
-pythagoreanTripletsWithSum n = filter pythagoreanTriplet $ tripletsWithSum n
+pythagoreanTripletsWithSum = filter pythagoreanTriplet . tripletsWithSum

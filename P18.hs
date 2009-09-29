@@ -2,7 +2,7 @@ module P18 (euler18, euler67) where
 
 -- my original solution
 maxPathSlow tri (depth,x) | depth == maxDepth = 0
-                          | otherwise         = v + (max l r)
+                          | otherwise         = v + max l r
     where
         v = value tri (depth, x)
         l = maxPathSlow tri $ left (depth,x)

@@ -11,7 +11,7 @@ pent n = n*(3*n-1) `div` 2
 hex n  = n*(2*n-1)
 
 series (a:as) (b:bs) (c:cs)
-    | a == b && a == c = a:(series as bs cs)
+    | a == b && a == c = a : series as bs cs
     | a < b || a < c   = series as (b:bs) (c:cs)
     | b < a || b < c   = series (a:as) bs (c:cs)
     | c < a || c < b   = series (a:as) (b:bs) cs

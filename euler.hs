@@ -5,9 +5,9 @@ import Data.List
 main :: IO ()
 main = do
     arg <- parseArg
-    case arg of
-        Just(n)  -> printIt $ filter ((==n) . num) solutions
-        Nothing  -> printIt $ solutions
+    printIt $ case arg of
+        Just(n)  -> filter ((==n) . num) solutions
+        Nothing  -> solutions
 
 parseArg :: IO (Maybe Integer)
 parseArg = do
@@ -17,8 +17,7 @@ parseArg = do
         _     -> Nothing
 
 printIt :: [Solution] -> IO ()
-printIt ss = do
-    mapM_ (\x -> format x >>= putStrLn) ss
+printIt ss = mapM_ (\x -> format x >>= putStrLn) ss
         where
             format s = do
                 let n = num s

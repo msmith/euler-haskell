@@ -36,9 +36,9 @@ euler4 = maximum $ map undigits $ filter palindrome [digits (x * y) | x <- ns, y
 
 euler5 = Util.lcm [2..20]
 
-euler6 = (square $ sum nums) - (sum $ map square nums)
+euler6 = square (sum nums) - sum (map square nums)
     where
-        square x = x^2
+        square = (^2)
         nums = [1..100]
 
 euler7 = primes!!(10001-1)
@@ -68,21 +68,21 @@ euler24 = undigits $ map fromIntegral $ lexPermutation [0..9] (1000000-1)
 
 euler25 = fromIntegral . (1+) . length $ takeWhile p fibs
     where
-        p x = (length $ digits x) < 1000
+        p x = length (digits x) < 1000
 
 euler35 = fromIntegral $ length $ filter isCircularPrime $ takeWhile (<1000000) primes
 
-euler36 = sum $ [x | x <- [0..999999], palindrome (digits x) && palindrome (digitsBase 2 x)]
+euler36 = sum [x | x <- [0..999999], palindrome (digits x) && palindrome (digitsBase 2 x)]
 
 euler40 = product $ map (\x -> d!!(x-1)) [1,10,100,1000,10000,100000,1000000]
     where
-        d = concat $ map digits [1..1000000]
+        d = concatMap digits [1..1000000]
 
-euler48 = (lastDigits 10) . sum $ map pow [1..1000]
+euler48 = lastDigits 10 . sum $ map pow [1..1000]
     where
         pow x = x^x
-        lastDigits n = undigits . (takeLast n) . digits
-        takeLast n = reverse . (take n) . reverse
+        lastDigits n = undigits . takeLast n . digits
+        takeLast n = reverse . take n . reverse
 
 
 euler53 = fromIntegral $ length $ filter (>1000000) xs
